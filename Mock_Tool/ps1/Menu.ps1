@@ -57,7 +57,7 @@ function CreateShortcut($sArgSpecialLine,$nWindowStyleIdx){
 		#リンク先(対象となるファイル)
 		$lnk.TargetPath = "powershell";
 		#コマンドライン引数
-		$lnk.Arguments = $CurDir+ "\" + $s[1] + " " + $s[2];
+		$lnk.Arguments = "-WindowStyle Hidden -command " + $CurDir + "\" + $s[1] + " " + $s[2];
 		#作業フォルダ
 		$lnk.WorkingDirectory = $CurDir;
 		#アイコン(パス+インデックス)
@@ -277,7 +277,7 @@ try {
         CreateShortcut $tmpline 7
 
         #ショートカット作成（SettingMenu）
-        CreateShortcut "-WindowStyle Hidden -command SettingMenu,Menu.ps1,,Ctrl+Shift+Alt+A" 1
+        CreateShortcut "SettingMenu,Menu.ps1,,Ctrl+Shift+Alt+A" 1
 
         #Tipsメッセージを表示
         [System.Windows.Forms.MessageBox]::Show("設定が完了しました。"+"`n"+
