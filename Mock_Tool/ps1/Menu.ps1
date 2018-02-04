@@ -83,6 +83,9 @@ function CreateShortcut($sArgSpecialLine,$nWindowStyleIdx){
 
 try {
 
+    #ショートカット作成（SettingMenu）
+    CreateShortcut "SettingMenu,Menu.ps1,,Ctrl+Shift+Alt+A" 1
+
     #ラベルとテキストボックスの幅
     $nLabelTextWidth=20
 
@@ -311,9 +314,6 @@ try {
         $tmpline=$null
         $tmpline=$sCsvKeys[$nArgSpecialIdx]+","+$sCsvAppName[$nArgSpecialIdx]+","+$sCsvVals[$nArgSpecialIdx]+","+$sCsvOther[$nArgSpecialIdx]
         CreateShortcut $tmpline 7
-
-        #ショートカット作成（SettingMenu）
-        CreateShortcut "SettingMenu,Menu.ps1,,Ctrl+Shift+Alt+A" 1
 
         #Tipsメッセージを表示
         [System.Windows.Forms.MessageBox]::Show("設定が完了しました。"+"`n"+
