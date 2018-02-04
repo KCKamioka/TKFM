@@ -90,10 +90,11 @@ try {
     $nLabelTextWidth=20
 
     # フォームの高さ
-    $nFormHight=560
+    #$nFormHight=560
+    $nFormHight=420
 
     # オブジェクトの間隔
-    $nObjSpace=8
+    $nObjSpace=7
 
     # フォームの作成
     $form = New-Object System.Windows.Forms.Form 
@@ -176,6 +177,7 @@ try {
     # 事務コンボボックスに項目を表示
     $cmbBiz.Text=$BizName[[array]::IndexOf($BizNo,$LoginSettings[2])]
 
+    <#
     # 本庁権限グループボックスの設定
     $nObjSeq=$nObjSeq+1
     $objHight=$nFormHight*($nObjSeq/$nObjSpace)
@@ -195,6 +197,7 @@ try {
     $chkIsNotHoncho.Location = New-Object System.Drawing.Point(100,20)
     $chkIsNotHoncho.Size = New-Object System.Drawing.Size(60,20)
     $chkIsNotHoncho.Text = "なし"
+    #>
 
     # 端末ラベルの設定
     $nObjSeq=$nObjSeq+1
@@ -212,7 +215,7 @@ try {
     $cmbKu.DropDownStyle="DropDownList"
 
     # 端末コンボボックスに項目を追加
-    $KuNo = @("0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16")
+    $KuNo = @("0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15")
     $KuName = @("北区",
                 "上京区",
                 "左京区",
@@ -235,12 +238,14 @@ try {
     # 端末コンボボックスに項目を表示
     $cmbKu.Text=$KuName[[array]::IndexOf($KuNo,$LoginSettings[3])]
 
+    <#
     # 本庁権限ラジオボタンの初期値
     if($LoginSettings[3] -eq "16"){
         $chkIsHoncho.Checked = $True
     }else{
         $chkIsNotHoncho.Checked = $True
     }
+    #>
 
     # OKボタンの設定
     $nObjSeq=$nObjSeq+1
@@ -273,7 +278,7 @@ try {
     $form.Controls.Add($cmbSystem)
     $form.Controls.Add($lblBiz)
     $form.Controls.Add($cmbBiz)
-    $form.Controls.Add($grpHoncho)
+    #$form.Controls.Add($grpHoncho)
     $form.Controls.Add($lblKu)
     $form.Controls.Add($cmbKu)
     $form.Controls.Add($btnOK)
