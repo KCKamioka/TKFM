@@ -87,10 +87,10 @@ try {
     $nLabelTextWidth=20
 
     # フォームの高さ
-    $nFormHight=480
+    $nFormHight=560
 
     # オブジェクトの間隔
-    $nObjSpace=7
+    $nObjSpace=8
 
     # フォームの作成
     $form = New-Object System.Windows.Forms.Form 
@@ -153,25 +153,45 @@ try {
     # 事務ラベルの設定
     $nObjSeq=$nObjSeq+1
     $objHight=$nFormHight*($nObjSeq/$nObjSpace)
-    $lblZimu = New-Object System.Windows.Forms.Label
-    $lblZimu.Location = New-Object System.Drawing.Point(10,$objHight) 
-    $lblZimu.Size = New-Object System.Drawing.Size(120,20) 
-    $lblZimu.Text = "事務："
+    $lblBiz = New-Object System.Windows.Forms.Label
+    $lblBiz.Location = New-Object System.Drawing.Point(10,$objHight) 
+    $lblBiz.Size = New-Object System.Drawing.Size(120,20) 
+    $lblBiz.Text = "事務："
   
     # 事務コンボボックスを作成
     $objHight=$objHight+$nLabelTextWidth
-    $cmbZimu = New-Object System.Windows.Forms.Combobox
-    $cmbZimu.Location = New-Object System.Drawing.Point(20,$objHight)
-    $cmbZimu.size = New-Object System.Drawing.Size(200,50)
-    $cmbZimu.DropDownStyle="DropDownList"
+    $cmbBiz = New-Object System.Windows.Forms.Combobox
+    $cmbBiz.Location = New-Object System.Drawing.Point(20,$objHight)
+    $cmbBiz.size = New-Object System.Drawing.Size(200,50)
+    $cmbBiz.DropDownStyle="DropDownList"
 
     # 事務コンボボックスに項目を追加
-    $ZimuNo = @("0","1","2","3","4","5")
-    $ZimuName = @("老人医療","障害者医療","ひとり親医療","子ども医療","所属長","管理者")
-    [void] $cmbZimu.Items.AddRange($ZimuName)
+    $BizNo = @("0","1","2","3","4","5")
+    $BizName = @("老人医療","障害者医療","ひとり親医療","子ども医療","所属長","管理者")
+    [void] $cmbBiz.Items.AddRange($BizName)
 
     # 事務コンボボックスに項目を表示
-    $cmbZimu.Text=$ZimuName[[array]::IndexOf($ZimuNo,$LoginSettings[2])]
+    $cmbBiz.Text=$BizName[[array]::IndexOf($BizNo,$LoginSettings[2])]
+
+    # 本庁権限グループボックスの設定
+    $nObjSeq=$nObjSeq+1
+    $objHight=$nFormHight*($nObjSeq/$nObjSpace)
+    $grpHoncho = New-Object System.Windows.Forms.GroupBox
+    $grpHoncho.Location = New-Object System.Drawing.Point(10,$objHight) 
+    $grpHoncho.Size = New-Object System.Drawing.Size(200,50) 
+    $grpHoncho.Text = "本庁権限"
+
+    # 本庁権限ラジオボタン（あり）の設定
+    $chkIsHoncho = New-Object System.Windows.Forms.RadioButton
+    $chkIsHoncho.Location = New-Object System.Drawing.Point(20,20)
+    $chkIsHoncho.Size = New-Object System.Drawing.Size(40,20)
+    $chkIsHoncho.Text = "あり"
+
+    # 本庁権限ラジオボタン（なし）の設定
+    $chkIsNotHoncho = New-Object System.Windows.Forms.RadioButton
+    $chkIsNotHoncho.Location = New-Object System.Drawing.Point(100,20)
+    $chkIsNotHoncho.Size = New-Object System.Drawing.Size(60,20)
+    $chkIsNotHoncho.Text = "なし"
 
     # 端末ラベルの設定
     $nObjSeq=$nObjSeq+1
@@ -185,7 +205,7 @@ try {
     $objHight=$objHight+$nLabelTextWidth
     $cmbKu = New-Object System.Windows.Forms.Combobox
     $cmbKu.Location = New-Object System.Drawing.Point(20,$objHight)
-    $cmbKu.size = New-Object System.Drawing.Size(80,50)
+    $cmbKu.size = New-Object System.Drawing.Size(200,50)
     $cmbKu.DropDownStyle="DropDownList"
 
     # 端末コンボボックスに項目を追加
@@ -194,44 +214,30 @@ try {
                 "上京区",
                 "左京区",
                 "中京区",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "")
+                "PC0020",
+                "PC0022",
+                "PC0024",
+                "PC0026",
+                "PC0028",
+                "PC0030",
+                "PC0032",
+                "PC0034",
+                "PC0036",
+                "PC0038",
+                "PC0040",
+                "PC0088",
+                "PC0099")
     [void] $cmbKu.Items.AddRange($KuName)
 
     # 端末コンボボックスに項目を表示
     $cmbKu.Text=$KuName[[array]::IndexOf($KuNo,$LoginSettings[3])]
-    
-    # 本庁権限ラベルの設定
-    $nObjSeq=$nObjSeq+1
-    $objHight=$nFormHight*($nObjSeq/$nObjSpace)
-    $lblHoncho = New-Object System.Windows.Forms.Label
-    $lblHoncho.Location = New-Object System.Drawing.Point(10,$objHight) 
-    $lblHoncho.Size = New-Object System.Drawing.Size(120,20) 
-    $lblHoncho.Text = "本庁権限："
-    
-    # 本庁権限ラジオボタン（あり）の設定
-    $objHight=$objHight+$nLabelTextWidth
-    $ChkIsHoncho = New-Object System.Windows.Forms.RadioButton
-    $ChkIsHoncho.Location = New-Object System.Drawing.Point(40,$objHight)
-    $ChkIsHoncho.Size = New-Object System.Drawing.Size(40,20)
-    $ChkIsHoncho.Checked = $True
-    $ChkIsHoncho.Text = "あり"
 
-    # 本庁権限ラジオボタン（なし）の設定
-    $ChkIsNotHoncho = New-Object System.Windows.Forms.RadioButton
-    $ChkIsNotHoncho.Location = New-Object System.Drawing.Point(120,$objHight)
-    $ChkIsNotHoncho.Checked = $False
-    $ChkIsNotHoncho.Text = "なし"
+    # 本庁権限ラジオボタンの初期値
+    if($LoginSettings[3] -eq "16"){
+        $chkIsHoncho.Checked = $True
+    }else{
+        $chkIsNotHoncho.Checked = $True
+    }
 
     # OKボタンの設定
     $nObjSeq=$nObjSeq+1
@@ -253,18 +259,19 @@ try {
     $form.AcceptButton = $btnOK
     $form.CancelButton = $btnCancel
     
+    
+    $grpHoncho.Controls.AddRange(@($chkIsHoncho,$chkIsNotHoncho))
+
     # ボタン等をフォームに追加
     $form.Controls.Add($lblTips)
     $form.Controls.Add($lblServer) 
     $form.Controls.Add($cmbServer)
     $form.Controls.Add($lblSystem)
     $form.Controls.Add($cmbSystem)
-    $form.Controls.Add($lblZimu)
-    $form.Controls.Add($cmbZimu)
+    $form.Controls.Add($lblBiz)
+    $form.Controls.Add($cmbBiz)
+    $form.Controls.Add($grpHoncho)
     $form.Controls.Add($lblKu)
-    $form.Controls.Add($lblHoncho)
-    $form.Controls.Add($ChkIsHoncho)
-    $form.Controls.Add($ChkIsNotHoncho)
     $form.Controls.Add($cmbKu)
     $form.Controls.Add($btnOK)
     $form.Controls.Add($btnCancel)
@@ -278,9 +285,13 @@ try {
         #csv設定内容を取得
         $LoginSettings[0]=$ServerNo[[array]::IndexOf($ServerName,$cmbServer.Text)]
         $LoginSettings[1]=$SystemNo[[array]::IndexOf($SystemName,$cmbSystem.Text)]
-        $LoginSettings[2]=$ZimuNo[[array]::IndexOf($ZimuName,$cmbZimu.Text)]
-        $LoginSettings[3]=$KuNo[[array]::IndexOf($KuName,$cmbKu.Text)]
-        
+        $LoginSettings[2]=$BizNo[[array]::IndexOf($BizName,$cmbBiz.Text)]
+        if($chkIsHoncho.Checked){
+            $LoginSettings[3]="16"
+        }else{
+            $LoginSettings[3]=$KuNo[[array]::IndexOf($KuName,$cmbKu.Text)]
+        }
+
         #csvファイル書込
         $sTmpLoginSettings=$null
         $sTmpLoginSettings=[System.String]::Join(" ", $LoginSettings)
