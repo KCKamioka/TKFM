@@ -149,7 +149,7 @@ try {
 
     # システムコンボボックスに項目を表示
     $cmbSystem.Text=$SystemName[[array]::IndexOf($SystemNo,$LoginSettings[1])]
-    
+  
     # 事務ラベルの設定
     $nObjSeq=$nObjSeq+1
     $objHight=$nFormHight*($nObjSeq/$nObjSpace)
@@ -185,7 +185,7 @@ try {
     $objHight=$objHight+$nLabelTextWidth
     $cmbKu = New-Object System.Windows.Forms.Combobox
     $cmbKu.Location = New-Object System.Drawing.Point(20,$objHight)
-    $cmbKu.size = New-Object System.Drawing.Size(200,50)
+    $cmbKu.size = New-Object System.Drawing.Size(80,50)
     $cmbKu.DropDownStyle="DropDownList"
 
     # 端末コンボボックスに項目を追加
@@ -210,6 +210,28 @@ try {
 
     # 端末コンボボックスに項目を表示
     $cmbKu.Text=$KuName[[array]::IndexOf($KuNo,$LoginSettings[3])]
+    
+    # 本庁権限ラベルの設定
+    $nObjSeq=$nObjSeq+1
+    $objHight=$nFormHight*($nObjSeq/$nObjSpace)
+    $lblHoncho = New-Object System.Windows.Forms.Label
+    $lblHoncho.Location = New-Object System.Drawing.Point(10,$objHight) 
+    $lblHoncho.Size = New-Object System.Drawing.Size(120,20) 
+    $lblHoncho.Text = "本庁権限："
+    
+    # 本庁権限ラジオボタン（あり）の設定
+    $objHight=$objHight+$nLabelTextWidth
+    $ChkIsHoncho = New-Object System.Windows.Forms.RadioButton
+    $ChkIsHoncho.Location = New-Object System.Drawing.Point(40,$objHight)
+    $ChkIsHoncho.Size = New-Object System.Drawing.Size(40,20)
+    $ChkIsHoncho.Checked = $True
+    $ChkIsHoncho.Text = "あり"
+
+    # 本庁権限ラジオボタン（なし）の設定
+    $ChkIsNotHoncho = New-Object System.Windows.Forms.RadioButton
+    $ChkIsNotHoncho.Location = New-Object System.Drawing.Point(120,$objHight)
+    $ChkIsNotHoncho.Checked = $False
+    $ChkIsNotHoncho.Text = "なし"
 
     # OKボタンの設定
     $nObjSeq=$nObjSeq+1
@@ -240,6 +262,9 @@ try {
     $form.Controls.Add($lblZimu)
     $form.Controls.Add($cmbZimu)
     $form.Controls.Add($lblKu)
+    $form.Controls.Add($lblHoncho)
+    $form.Controls.Add($ChkIsHoncho)
+    $form.Controls.Add($ChkIsNotHoncho)
     $form.Controls.Add($cmbKu)
     $form.Controls.Add($btnOK)
     $form.Controls.Add($btnCancel)
